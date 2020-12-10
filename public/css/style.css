@@ -51,4 +51,5 @@ button {
 input {
     border: 1px solid #cccccc;
     padding: 8pc;
+    height: 50px;
 }
