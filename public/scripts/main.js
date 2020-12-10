@@ -3,7 +3,6 @@ const weatherForm = document.querySelector("form");
 const search = document.querySelector("input");
 const messageOne = document.querySelector("#messageOne");
 const messageTwo = document.querySelector("#messageTwo");
-messageOne.textContent = 
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -11,7 +10,7 @@ weatherForm.addEventListener('submit', (e) => {
     messageOne.textContent = 'Loading ... ';
     messageTwo.textContent = '';
 
-    const url2 = `http://localhost:3000/weather?address=${address}`;
+    const url2 = `/weather?address=${address}`;
     fetch(url2).then((res) => {
 
         res.json().then((data) => {
