@@ -1,10 +1,12 @@
 const path = require('path');
-const request = require('postman-request');
 
 const express = require('express');
 const hbs = require('hbs');
 
 const app = express();
+
+const geocode = require("./utils/geocode");
+const weather = require("./utils/weather");
 
 //Define Paths for express config
 const publicPath = path.join(__dirname, "../public");
@@ -42,18 +44,33 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+
     if(!req.query.address) {
         return res.send({
             error:  'You must provide an address'
         });
     }
 
-    console.log(req.query.address);
-    const address = req.query.address
-    res.send({
-        forecase: 'It is snowing',
-        location: 'Philadelphia',
-        address
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+        if(error){
+            return  res.send({
+                error
+            });
+        }
+
+        weather(latitude, longitude, (error, {forecast} = {}) => {
+            if(error) {
+                return res.send({
+                    error
+                });
+            }
+
+            res.send({
+                forecast,
+                location,
+                address: req.query.address
+            })
+        });
     });
 });
 

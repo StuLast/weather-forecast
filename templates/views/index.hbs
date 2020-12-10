@@ -1,8 +1,18 @@
 {{>head}}
         <div class="main-content">
             {{>header}}
-            <p>USe this site to get your weather</p>
+            <p>Use this site to get your weather</p>
+            <form>
+                <input type="text" placeholder="Location">
+                <button>Search</button>
+            </form>
+        </div>
+
+        <div class="forecast">
+        <p id="messageOne"></p>
+        <p id="messageTwo"></p>
         </div>
         
         {{>footer}}
+        <script src="scripts/main.js"></script>
 {{>foot}}
